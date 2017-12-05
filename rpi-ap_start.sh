@@ -1,6 +1,7 @@
 #!/bin/bash
 # https://qiita.com/mt08/items/b6356b8e967f5c121bf1
 
+: ${AP_ENABLE_HOSTAPD:=1}
 : ${AP_INTERFACE_OUTGOING:=eth0}
 	
 : ${AP_SUBNET:=192.168.42.0}
@@ -75,6 +76,7 @@ iptables -A FORWARD -i ${AP_INTERFACE} -o ${AP_INTERFACE_OUTGOING} -j ACCEPT
 
 mkdir -p /var/lib/dhcp/ && touch  /var/lib/dhcp/dhcpd.leases
 
-dhcpd ${AP_INTERFACE}
-hostapd /etc/hostapd/hostapd.conf
+[ ${AP_ENABLE_HOSTAPD} == 1 ] && hostapd -B /etc/hostapd/hostapd.conf
+
+dhcpd -d ${AP_INTERFACE}
 
