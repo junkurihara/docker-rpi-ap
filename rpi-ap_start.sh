@@ -1,4 +1,5 @@
 #!/bin/bash
+# https://qiita.com/mt08/items/b6356b8e967f5c121bf1
 
 : ${AP_INTERFACE_OUTGOING:=eth0}
 	

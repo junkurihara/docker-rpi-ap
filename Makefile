@@ -1,29 +1,44 @@
 # Makefile
-#  mt08
-#
+# https://qiita.com/mt08/items/b6356b8e967f5c121bf1  
 
 SSID=RPi-AP
-PASSWORD=password
-
+PASS=password
+DAEMON=1
+CH=6
 
 DOCKER_IMAGE_NAME=mt08/rpi-ap
-DOCKER_IMAGE_VERSION=2017.1204.1
+DOCKER_IMAGE_VERSION=2017.1206.1
+
+ifeq ($(DAEMON),1)
+	DOCKER_OPT=-d
+else
+	DOCKER_OPT=-it
+endif
 
 all:
 
 
 run:
-	docker run -d --rm -e AP_SSID=${SSID} -e AP_WPA_PASSPHRASE=${PASSWORD} --net=host --privileged ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}
+	make stop
+	docker run ${DOCKER_OPT} --rm -e AP_SSID=${SSID} -e AP_WPA_PASSPHRASE=${PASS} -e AP_CHANNEL=${CH} --net=host --privileged ${DOCKER_IMAGE_NAME}
+
 stop:
-	docker ps -a | grep "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}" | cut -f 1 -d' ' | xargs -P1 -i docker stop -t 0 {}
+	docker ps -a | grep "${DOCKER_IMAGE_NAME}" | cut -f 1 -d' ' | xargs -P1 -i docker stop -t 0 {}
+
 status:
 	docker ps -a 
+
 build: Dockerfile rpi-ap_start.sh
 	docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION} .
+	docker tag ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION} ${DOCKER_IMAGE_NAME}:latest
 
 clean:
-	docker ps -a | grep "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}" | cut -f 1 -d' ' | xargs -P1 -i docker stop {}
+	# Stop container(s)
+	docker ps -a | grep "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}" | cut -f 1 -d' ' | xargs -P1 -i docker stop -t 0 {}
+	# Remove container(s)
 	docker ps -a | grep "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}" | cut -f 1 -d' ' | xargs -P1 -i docker rm {}
-	docker images "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}" | tail -n +2
-	docker rmi ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}
+	# Remove Image(s)
+	docker images "${DOCKER_IMAGE_NAME}" | sed 's/\s\+/ /g' | tail -n +2 | cut -f 2 -d ' '| xargs -P1 -i docker rmi ${DOCKER_IMAGE_NAME}:{}
 
+
+.PHONY: all run stop status build clean
