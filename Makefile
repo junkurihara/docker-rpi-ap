@@ -7,7 +7,8 @@ DAEMON=1
 CH=6
 
 DOCKER_IMAGE_NAME=mt08/rpi-ap
-DOCKER_IMAGE_VERSION=2017.1206.2
+DOCKER_IMAGE_VERSION=2017.1213.1
+DOCKER_CONTAINER_NAME=rpi-ap
 
 ifeq ($(DAEMON),1)
 	DOCKER_OPT=-d
@@ -20,7 +21,10 @@ all:
 
 run:
 	make stop
-	docker run ${DOCKER_OPT} --rm -e AP_SSID=${SSID} -e AP_WPA_PASSPHRASE=${PASS} -e AP_CHANNEL=${CH} --net=host --privileged ${DOCKER_IMAGE_NAME}
+	docker run ${DOCKER_OPT} --name ${DOCKER_CONTAINER_NAME} --rm -e AP_SSID=${SSID} -e AP_WPA_PASSPHRASE=${PASS} -e AP_CHANNEL=${CH} --net=host --privileged ${DOCKER_IMAGE_NAME}
+
+bash:
+	docker exec -it ${DOCKER_CONTAINER_NAME} /bin/bash
 
 stop:
 	docker ps -a | grep "${DOCKER_IMAGE_NAME}" | cut -f 1 -d' ' | xargs -P1 -i docker stop -t 0 {}
