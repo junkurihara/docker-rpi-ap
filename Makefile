@@ -1,8 +1,8 @@
 # Makefile
 # https://qiita.com/mt08/items/b6356b8e967f5c121bf1  
 
-SSID=RPi-AP
-PASS=password
+SSID=Pi4-AP
+PASS=raspberry
 DAEMON=1
 CH=6
 
