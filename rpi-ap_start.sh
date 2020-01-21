@@ -71,10 +71,10 @@ rsn_pairwise=${AP_RSN_PAIRWISE}
 hw_mode=${AP_HW_MODE}
 ieee80211ac=${AP_IEEE80211AC}
 logger_syslog_level=4
-ieee80211d=1
-country_code=JP
-vht_capab=[MAX-AMSDU-3839][SHORT-GI-80]
-vht_oper_chwidth=0 # 1: 80MHz
+#ieee80211d=1
+#country_code=JP
+#vht_capab=[MAX-AMSDU-3839][SHORT-GI-80]
+#vht_oper_chwidth=0 # 1: 80MHz
 #vht_oper_centr_freq_seg0_idx=42  #帯域80MHzの場合に指定する。channel+6
 EOF
 
