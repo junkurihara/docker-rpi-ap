@@ -16,11 +16,12 @@
 : ${AP_DRIVER:=nl80211}
 #: ${AP_DRIVER:=rtl871xdrv}
 : ${AP_SSID:=Pi4-AP}
-: ${AP_HW_MODE:=g}
-: ${AP_CHANNEL:=6}
+: ${AP_HW_MODE:=a}
+: ${AP_CHANNEL:=36}
 : ${AP_IEEE80211N:=1}
 : ${AP_WMM_ENABLED:=1}
-: ${AP_HT_CAPAB:=[HT40][SHORT-GI-20][DSSS_CCK-40]}
+#: ${AP_HT_CAPAB:=[HT40][SHORT-GI-20][DSSS_CCK-40]}
+: ${AP_HT_CAPAB:=[MAX-AMSDU-3839][HT40-][HT40+][SHORT-GI-20][SHORT-GI-40][DSSS_CCK-40]}
 : ${AP_MACADDR_ACL:=0}
 : ${AP_AUTH_ALGS:=1}
 : ${AP_IGNORE_BROADCAST_SSID:=0}
@@ -28,7 +29,6 @@
 : ${AP_WPA:=2}
 : ${AP_WPA_KEY_MGMT:=WPA-PSK}
 : ${AP_RSN_PAIRWISE:=CCMP}
-: ${AP_HW_MODE:=a} # 802.11ac
 : ${AP_IEEE80211AC:=1} # 802.11ac
 
 
@@ -70,6 +70,12 @@ wpa_passphrase=${AP_WPA_PASSPHRASE}
 rsn_pairwise=${AP_RSN_PAIRWISE}
 hw_mode=${AP_HW_MODE}
 ieee80211ac=${AP_IEEE80211AC}
+ogger_syslog_level=4
+ieee80211d=1
+vht_capab=[MAX-AMSDU-3839][SHORT-GI-80]
+vht_oper_chwidth=1
+vht_oper_centr_freq_seg0_idx=42  #帯域80MHzの場合に指定する。channel+6
+country_code=US
 EOF
 
 
