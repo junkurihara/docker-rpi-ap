@@ -5,7 +5,7 @@
 : ${AP_INTERFACE_OUTGOING:=eth0}
 	
 : ${AP_SUBNET:=192.168.42.0}
-: ${AP_DNS:=192.168.11.100}
+: ${AP_DNS:=192.168.11.8}
 : ${AP_DOMAIN:="local"}
 : ${AP_RANGE_LO:=100}
 : ${AP_RANGE_HI:=200}
