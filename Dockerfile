@@ -1,8 +1,8 @@
 # sudo docker build -t mt08/rpi-ap .
 # sudo docker run -it --rm --net=host --privileged mt08/rpi-ap
 
-FROM resin/rpi-raspbian:stretch
-LABEL maintainer="mt08 <mt08xx@users.noreply.github.com>"
+FROM resin/rpi-raspbian:buster
+LABEL maintainer="Jun Kurihara <junkurihara@users.noreply.github.com> (original: mt08 <mt08xx@users.noreply.github.com>)"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     hostapd isc-dhcp-server iptables iproute2 && \

@@ -5,7 +5,7 @@
 : ${AP_INTERFACE_OUTGOING:=eth0}
 	
 : ${AP_SUBNET:=192.168.42.0}
-: ${AP_DNS:=8.8.8.8, 8.8.4.4}
+: ${AP_DNS:=192.168.11.100}
 : ${AP_DOMAIN:="local"}
 : ${AP_RANGE_LO:=100}
 : ${AP_RANGE_HI:=200}
@@ -15,7 +15,7 @@
 : ${AP_INTERFACE:=wlan0}
 : ${AP_DRIVER:=nl80211}
 #: ${AP_DRIVER:=rtl871xdrv}
-: ${AP_SSID:=Pi3-AP}
+: ${AP_SSID:=Pi4-AP}
 : ${AP_HW_MODE:=g}
 : ${AP_CHANNEL:=6}
 : ${AP_IEEE80211N:=1}
@@ -28,6 +28,8 @@
 : ${AP_WPA:=2}
 : ${AP_WPA_KEY_MGMT:=WPA-PSK}
 : ${AP_RSN_PAIRWISE:=CCMP}
+: ${AP_HW_MODE:=a} # 802.11ac
+: ${AP_IEEE80211AC:=1} # 802.11ac
 
 
 # IP Address 
@@ -66,6 +68,8 @@ wpa=${AP_WPA}
 wpa_key_mgmt=${AP_WPA_KEY_MGMT}
 wpa_passphrase=${AP_WPA_PASSPHRASE}
 rsn_pairwise=${AP_RSN_PAIRWISE}
+hw_mode=${AP_HW_MODE}
+ieee80211ac=${AP_IEEE80211AC}
 EOF
 
 
