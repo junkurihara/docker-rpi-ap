@@ -20,7 +20,8 @@
 : ${AP_CHANNEL:=36}
 : ${AP_IEEE80211N:=1}
 : ${AP_WMM_ENABLED:=1}
-: ${AP_HT_CAPAB:=[HT40][SHORT-GI-20][DSSS_CCK-40]}
+: ${AP_HT_CAPAB:=[HT40+][SHORT-GI-40][SHORT-GI-20][DSSS_CCK-40][MAX-AMSDU-3839]}
+#: ${AP_HT_CAPAB:=[HT40+][SHORT-GI-40][SHORT-GI-20][DSSS_CCK-40][MAX-AMSDU-3839]}
 #: ${AP_HT_CAPAB:=[MAX-AMSDU-3839][HT40-][HT40+][SHORT-GI-20][SHORT-GI-40][DSSS_CCK-40]}
 : ${AP_MACADDR_ACL:=0}
 : ${AP_AUTH_ALGS:=1}
@@ -70,12 +71,14 @@ wpa_passphrase=${AP_WPA_PASSPHRASE}
 rsn_pairwise=${AP_RSN_PAIRWISE}
 hw_mode=${AP_HW_MODE}
 ieee80211ac=${AP_IEEE80211AC}
-logger_syslog_level=4
-ieee80211d=1
-country_code=US
-vht_capab=[MAX-AMSDU-3839][SHORT-GI-80]
-vht_oper_chwidth=1 # 1: 80MHz
-vht_oper_centr_freq_seg0_idx=42  #帯域80MHzの場合に指定する。channel+6
+#logger_syslog_level=4
+#ieee80211d=1
+#country_code=JP
+#vht_capab=[SHORT-GI-80]
+#vht_capab=[MAX-AMSDU-3839][SHORT-GI-80]
+#vht_capab=[MAX-MPDU-3895][SHORT-GI-80][SU-BEAMFORMEE]
+#vht_oper_chwidth=1 # 1: 80MHz
+#vht_oper_centr_freq_seg0_idx=42  #帯域80MHzの場合に指定する。channel+6
 EOF
 
 
